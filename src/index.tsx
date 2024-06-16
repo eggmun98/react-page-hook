@@ -8,6 +8,8 @@ interface IProps {
   initPage?: number;
   dataLength?: number;
   initTotalPage: number;
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Wrapper = styled.div`
@@ -34,13 +36,15 @@ export const Pagination: React.FC<IProps> = ({
   initPage = 1,
   dataLength = 10,
   initTotalPage = -1,
+  page,
+  setPage,
 }) => {
-  const [pageIndex, setPageIndex] = useState<number>(initPage);
+  // const [page, setPage] = useState<number>(initPage);
   const [startPage, setStartPage] = useState<number>(initPage);
   const [totalPage] = useState<number>(initTotalPage);
 
   const movePageIndex = (pageIndex: number) => () => {
-    setPageIndex(pageIndex);
+    setPage(pageIndex);
   };
 
   const changePageGroup = (direction: string) => () => {
@@ -48,7 +52,7 @@ export const Pagination: React.FC<IProps> = ({
       direction === "next" ? startPage + pageSize : startPage - pageSize;
     if (newStartPage > 0 && newStartPage <= Math.ceil(totalPage / dataLength)) {
       setStartPage(newStartPage);
-      setPageIndex(newStartPage);
+      setPage(newStartPage);
     }
   };
 
@@ -58,11 +62,11 @@ export const Pagination: React.FC<IProps> = ({
     const resultPage = total - (total % pageSize) + lastPage;
 
     setStartPage(resultPage);
-    setPageIndex(resultPage);
+    setPage(resultPage);
   };
 
   const prevEndPage = () => {
-    setPageIndex(initPage);
+    setPage(initPage);
     setStartPage(initPage);
   };
 
@@ -80,7 +84,7 @@ export const Pagination: React.FC<IProps> = ({
         (_, index) =>
           index + startPage <= Math.ceil(totalPage / itemsPerPage) && (
             <div key={index} onClick={movePageIndex(index + startPage)}>
-              <PageList selected={index + startPage === pageIndex}>
+              <PageList selected={index + startPage === page}>
                 {index + startPage}
               </PageList>
             </div>
