@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 interface IProps {
   size?: number;
@@ -9,6 +10,23 @@ interface IProps {
   initTotalPage: number;
 }
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const ArrowWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 5%;
+`;
+
+const PageList = styled.div<{ selected: boolean }>`
+  color: ${(props) => (props.selected ? "red" : "black")};
+`;
 export const Pagination: React.FC<IProps> = ({
   size = 5,
   itemsPerPage = 10,
@@ -49,32 +67,34 @@ export const Pagination: React.FC<IProps> = ({
   };
 
   return (
-    <div>
-      <div>
+    <Wrapper>
+      <ArrowWrapper>
         <div onClick={prevEndPage}>
           <div>{"<<"}</div>
         </div>
         <div onClick={changePageGroup("prev")}>
           <div>{"<"}</div>
         </div>
-      </div>
+      </ArrowWrapper>
       {new Array(size).fill("").map(
         (_, index) =>
           index + startPage <= Math.ceil(totalPage / itemsPerPage) && (
             <div key={index} onClick={movePageIndex(index + startPage)}>
-              <div>{index + startPage}</div>
+              <PageList selected={index + startPage === pageIndex}>
+                {index + startPage}
+              </PageList>
             </div>
           )
       )}
-      <div>
+      <ArrowWrapper>
         <div onClick={changePageGroup("next")}>
           <div>{">"}</div>
         </div>
         <div onClick={nextEndPage}>
           <div>{">>"} </div>
         </div>
-      </div>
-    </div>
+      </ArrowWrapper>
+    </Wrapper>
   );
 };
 
