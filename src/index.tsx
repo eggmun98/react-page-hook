@@ -6,7 +6,7 @@ interface IProps {
   pageSize?: number;
   initPage?: number;
   dataLength?: number;
-  initTotalPage?: number;
+  initTotalPage: number;
 }
 
 export const Pagination: React.FC<IProps> = ({
@@ -52,10 +52,10 @@ export const Pagination: React.FC<IProps> = ({
     <div>
       <div>
         <div onClick={prevEndPage}>
-          <div>{"<"}</div>
+          <div>{"<<"}</div>
         </div>
         <div onClick={changePageGroup("prev")}>
-          <div>{"<<"}</div>
+          <div>{"<"}</div>
         </div>
       </div>
       {new Array(size).fill("").map(
