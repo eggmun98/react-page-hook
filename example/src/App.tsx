@@ -4,7 +4,7 @@ function App() {
   return (
     <>
       <div>React-page-hook</div>
-      <Pagination />
+      <Pagination initTotalPage={100} />
     </>
   );
 }
