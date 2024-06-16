@@ -20,6 +20,9 @@
   ],
   "author": "eggmun98",
   "license": "MIT",
+  "dependencies": {
+    "styled-components": "^6.1.11"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@rollup/plugin-babel": "^6.0.4",
@@ -36,7 +39,6 @@
   },
   "peerDependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "styled-components": "^6.1.11"
+    "react-dom": "^18.3.1"
   }
 }

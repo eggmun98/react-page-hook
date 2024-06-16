@@ -32,5 +32,5 @@ export default {
     typescript({ useTsconfigDeclarationDir: true }),
     babel({ babelHelpers: "bundled", exclude: "node_modules/**" }),
   ],
-  external: ["react", "react-dom", "styled-components"],
+  external: ["react", "react-dom"],
 };
